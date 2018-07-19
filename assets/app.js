@@ -6,6 +6,7 @@ import Parent from './js/index'
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
+      HEllo
       <Component />
     </AppContainer>,
     document.getElementById('container'),

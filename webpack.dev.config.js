@@ -26,6 +26,11 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('dev')
+        }
+    })
     ],
 
     module: {

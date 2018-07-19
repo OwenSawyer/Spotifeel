@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors",
-    "build": "npm run webpack && python manage.py runserver | node server.js"
+    "dev-postbuild": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.dev.config.js --progress",
+    "prod-postbuild": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.prod.config.js --progress"
   },
   "keywords": [],
   "author": "",

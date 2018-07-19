@@ -1,0 +1,24 @@
+FROM alpine:latest
+
+LABEL "version"="0.0.1"
+
+# BE build
+RUN apk add --no-cache --update python3 py3-pip bash
+ADD ./requirements.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir -q -r /tmp/requirements.txt
+
+# FE build
+RUN yarn install
+RUN npm run webpack
+RUN python manage.py collectstatic
+
+ADD ./drf_react /opt/drf_react/
+WORKDIR /opt/drf_react
+
+RUN adduser -D myuser
+USER myuser
+
+# Run the app.  CMD is required to run on Heroku
+# Expose is NOT supported by Heroku
+# $PORT is set by Heroku
+CMD ["node server.js && gunicorn drf_react.wsgi -w 3 --log-file -"]

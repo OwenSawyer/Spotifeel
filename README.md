@@ -5,7 +5,7 @@ Sentiment analysis through song valence + lyrics
 ## Setup
 
 ### CD
-- dockerize before heroku (really, just run deploys fully through docker)
+- [x] dockerize before heroku (really, just run deploys fully through docker)
 
 ### FE
 - swap React with Vue + (chartJS, vuex, hotloader) (ES2018?)
@@ -51,7 +51,14 @@ This project requires python 3+
 * `pip3 install -r requirements.txt`
 * `npm run webpack`
 * `python manage.py collectstatic`
+* `python manage.py runserver`
 
-### Running
+## Running
 * `npm run build`
-Connect to `localhost:8000
+- Connect to `localhost:8000
+
+## Deploying with Docker/Heroku
+heroku container:login
+heroku container:push web
+heroku container:release web
+heroku open

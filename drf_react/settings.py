@@ -90,9 +90,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 STATIC_URL = '/assets/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'assets'),
+# )
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
