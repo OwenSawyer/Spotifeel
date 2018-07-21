@@ -1,5 +1,3 @@
-require('./check-versions')()
-
 var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -62,7 +60,7 @@ app.use(hotMiddleware)
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./src/static'))
+app.use(staticPath, express.static('./app/static'))
 
 var uri = 'http://localhost:' + port
 

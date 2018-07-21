@@ -1,0 +1,204 @@
+[2018-07-22 06:22:31 +0000] [1] [INFO] Starting gunicorn 19.5.0
+[2018-07-22 06:22:31 +0000] [1] [INFO] Listening at: http://127.0.0.1:8000 (1)
+[2018-07-22 06:22:31 +0000] [1] [INFO] Using worker: sync
+[2018-07-22 06:22:31 +0000] [7] [INFO] Booting worker with pid: 7
+[2018-07-22 06:22:31 +0000] [8] [INFO] Booting worker with pid: 8
+[2018-07-22 06:22:31 +0000] [9] [INFO] Booting worker with pid: 9
+[2018-07-22 06:22:32 +0000] [8] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 69, in register
+    connection.get_connection(name=self.alias)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 240, in get_connection
+    raise CQLEngineException("Connection name '{0}' doesn't exist in the registry.".format(name))
+cassandra.cqlengine.CQLEngineException: Connection name 'default' doesn't exist in the registry.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 517, in spawn_worker
+    worker.init_process()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 122, in init_process
+    self.load_wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 132, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/lib/python3.6/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/opt/src/drf_react/wsgi.py", line 17, in <module>
+    application = get_wsgi_application()
+  File "/usr/lib/python3.6/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/usr/lib/python3.6/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/lib/python3.6/site-packages/django/apps/registry.py", line 112, in populate
+    app_config.import_models()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 62, in import_models
+    self.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 59, in connect
+    conn.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/base/__init__.py", line 118, in connect
+    self.connection = CassandraConnection(self.alias, **settings)
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 65, in __init__
+    self.register()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 83, in register
+    **self.connection_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 194, in register_connection
+    conn.setup()
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 101, in setup
+    self.cluster = Cluster(self.hosts, **self.cluster_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 825, in __init__
+    self.contact_points_resolved = [endpoint[4][0] for a in self.contact_points
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 826, in <listcomp>
+    for endpoint in socket.getaddrinfo(a, self.port, socket.AF_UNSPEC, socket.SOCK_STREAM)]
+  File "/usr/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name does not resolve
+[2018-07-22 06:22:32 +0000] [8] [INFO] Worker exiting (pid: 8)
+[2018-07-22 06:22:32 +0000] [9] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 69, in register
+    connection.get_connection(name=self.alias)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 240, in get_connection
+    raise CQLEngineException("Connection name '{0}' doesn't exist in the registry.".format(name))
+cassandra.cqlengine.CQLEngineException: Connection name 'default' doesn't exist in the registry.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 517, in spawn_worker
+    worker.init_process()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 122, in init_process
+    self.load_wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 132, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/lib/python3.6/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/opt/src/drf_react/wsgi.py", line 17, in <module>
+    application = get_wsgi_application()
+  File "/usr/lib/python3.6/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/usr/lib/python3.6/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/lib/python3.6/site-packages/django/apps/registry.py", line 112, in populate
+    app_config.import_models()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 62, in import_models
+    self.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 59, in connect
+    conn.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/base/__init__.py", line 118, in connect
+    self.connection = CassandraConnection(self.alias, **settings)
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 65, in __init__
+    self.register()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 83, in register
+    **self.connection_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 194, in register_connection
+    conn.setup()
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 101, in setup
+    self.cluster = Cluster(self.hosts, **self.cluster_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 825, in __init__
+    self.contact_points_resolved = [endpoint[4][0] for a in self.contact_points
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 826, in <listcomp>
+    for endpoint in socket.getaddrinfo(a, self.port, socket.AF_UNSPEC, socket.SOCK_STREAM)]
+  File "/usr/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name does not resolve
+[2018-07-22 06:22:32 +0000] [9] [INFO] Worker exiting (pid: 9)
+[2018-07-22 06:22:32 +0000] [7] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 69, in register
+    connection.get_connection(name=self.alias)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 240, in get_connection
+    raise CQLEngineException("Connection name '{0}' doesn't exist in the registry.".format(name))
+cassandra.cqlengine.CQLEngineException: Connection name 'default' doesn't exist in the registry.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 517, in spawn_worker
+    worker.init_process()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 122, in init_process
+    self.load_wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/workers/base.py", line 132, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/lib/python3.6/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/opt/src/drf_react/wsgi.py", line 17, in <module>
+    application = get_wsgi_application()
+  File "/usr/lib/python3.6/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/usr/lib/python3.6/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/lib/python3.6/site-packages/django/apps/registry.py", line 112, in populate
+    app_config.import_models()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 62, in import_models
+    self.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/apps.py", line 59, in connect
+    conn.connect()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/base/__init__.py", line 118, in connect
+    self.connection = CassandraConnection(self.alias, **settings)
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 65, in __init__
+    self.register()
+  File "/usr/lib/python3.6/site-packages/django_cassandra_engine/connection.py", line 83, in register
+    **self.connection_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 194, in register_connection
+    conn.setup()
+  File "/usr/lib/python3.6/site-packages/cassandra/cqlengine/connection.py", line 101, in setup
+    self.cluster = Cluster(self.hosts, **self.cluster_options)
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 825, in __init__
+    self.contact_points_resolved = [endpoint[4][0] for a in self.contact_points
+  File "/usr/lib/python3.6/site-packages/cassandra/cluster.py", line 826, in <listcomp>
+    for endpoint in socket.getaddrinfo(a, self.port, socket.AF_UNSPEC, socket.SOCK_STREAM)]
+  File "/usr/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name does not resolve
+[2018-07-22 06:22:32 +0000] [7] [INFO] Worker exiting (pid: 7)
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 183, in run
+    self.sleep()
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 316, in sleep
+    ready = select.select([self.PIPE[0]], [], [], 1.0)
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 218, in handle_chld
+    self.reap_workers()
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 466, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/bin/gunicorn", line 11, in <module>
+    sys.exit(run())
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 74, in run
+    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/base.py", line 192, in run
+    super(Application, self).run()
+  File "/usr/lib/python3.6/site-packages/gunicorn/app/base.py", line 72, in run
+    Arbiter(self).run()
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 205, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 301, in halt
+    self.stop()
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 348, in stop
+    time.sleep(0.1)
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 218, in handle_chld
+    self.reap_workers()
+  File "/usr/lib/python3.6/site-packages/gunicorn/arbiter.py", line 466, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
