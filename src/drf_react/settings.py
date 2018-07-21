@@ -20,8 +20,9 @@ INSTALLED_APPS = (
     #third party apps
     'rest_framework',
     'webpack_loader',
+    'django_cassandra_engine',
     #local apps
-    'api',
+    'src.api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -30,7 +31,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'drf_react.wsgi.application'
+WSGI_APPLICATION = 'src.drf_react.wsgi.application'
 
 ####
 #DATABASE
@@ -62,8 +63,16 @@ WSGI_APPLICATION = 'drf_react.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django_cassandra_engine',
+        'NAME': 'db',
+        'TEST_NAME': 'test_db',
+        'HOST': 'db1.example.com',
+        'OPTIONS': {
+            'replication': {
+                'strategy_class': 'SimpleStrategy',
+                'replication_factor': 1
+            }
+        }
     }
 }
 
@@ -86,7 +95,7 @@ USE_TZ = True
 ####
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, '../../app/assets')
+STATIC_ROOT = os.path.join(BASE_DIR, '../../app/../../app/assets')
 
 STATIC_URL = '/assets/'
 

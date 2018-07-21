@@ -1,13 +1,8 @@
 from rest_framework import serializers
 
-from .models import User, Url
+from .models import Example
 
-class UserSerializer(serializers.ModelSerializer):
+class ExampleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = '__all__'
-
-class UrlSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Url
+        model = Example
         fields = '__all__'

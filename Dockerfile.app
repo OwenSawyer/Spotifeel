@@ -1,30 +1,3 @@
-FROM alpine:latest
-
-LABEL "version"="0.0.1"
-
-# BE build
-RUN apk add --no-cache --update python3 py3-pip bash
-ADD ./requirements.txt /tmp/requirements.txt
-RUN pip3 install --no-cache-dir -q -r /tmp/requirements.txt
-
-# FE build
-RUN yarn install
-RUN npm run webpack
-RUN python manage.py collectstatic
-
-ADD ./drf_react /opt/drf_react/
-WORKDIR /opt/drf_react
-
-RUN adduser -D myuser
-USER myuser
-
-# Run the app.  CMD is required to run on Heroku
-# Expose is NOT supported by Heroku
-# $PORT is set by Heroku
-CMD ["node server.js && gunicorn drf_react.wsgi -w 3 --log-file -"]
-
-http://cassandra.apache.org/doc/latest/getting_started/index.html
-
 FROM alpine:3.8
 LABEL "version"="0.0.1"
 ## Default to UTF-8 file.encoding
@@ -52,9 +25,12 @@ LABEL "version"="0.0.1"
 #		openjdk8="$JAVA_ALPINE_VERSION" \
 #	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
 
+RUN mkdir -p /opt
+COPY ./ /opt
+
 #----PYTHON-----
-#
-RUN apk add --no-cache python3 && \
+
+RUN apk add python3 && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
@@ -62,39 +38,35 @@ RUN apk add --no-cache python3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
 
-RUN apk add --update util-linux
-#
-##-----NODE-----
-#
-#ENV NODEJS_VERSION=8.11.2 \
-#    PATH=$PATH:/opt/node/bin
-#
-#WORKDIR /opt/node
-#
-#RUN apk update && apk add --no-cache curl ca-certificates && \
-#    curl -sL https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz | tar xz --strip-components=1 && \
-#    rm -rf /var/lib/apt/lists/*
+#-----NODE-----
+
+ENV NODEJS_VERSION=8.11.3 \
+    PATH=$PATH:/opt/node/bin
+
+WORKDIR "/opt/node"
+
+RUN apk update && apk add nodejs~=8.11.3 nodejs-npm~=8.11.3
+
+RUN npm install -g -s --no-progress yarn && yarn
 
 #-----CUSTOM-----
-
-#WORKDIR /opt
-
+WORKDIR "/opt"
+ENV PYTHONPATH /opt
 ## BE build
 RUN mkdir -p /tmp
 #RUN apk add --update python3 py3-pip bash
-#ADD /opt/requirements.txt /tmp/requirements.txt
+COPY ./requirements.txt /tmp/requirements.txt
+RUN pip install -q -r /tmp/requirements.txt
 
-RUN mkdir -p /opt/drf_react
-RUN echo $(ls)
-RUN pip install -q -r ./requirements.txt
+RUN mkdir -p /opt && mkdir -p /opt/drf_react
 
 
-RUN npm install -g -s --no-progress yarn && yarn
     #&& \ yarn run prune
     #&& \ yarn cache clean
 
+
 RUN yarn run build
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 ##RUN adduser -D myuser
 ##USER myuser
@@ -102,4 +74,4 @@ RUN python manage.py collectstatic --noinput
 ## Run the app.  CMD is required to run on Heroku
 ## Expose is NOT supported by Heroku
 ## $PORT is set by Heroku
-CMD ["sh","-c","gunicorn drf_react.wsgi -w 3"]
+CMD ["sh","-c","gunicorn src.drf_react.wsgi:application -w 3"]
