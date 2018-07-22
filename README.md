@@ -33,7 +33,7 @@ Sentiment analysis through song valence + lyrics
 - keyword extraction + cleanup (contractions?..)
 
 ### REST Service
-- Redis setup (caching?)
+- Cassandra setup
 - User endpoints
 
 ### Frontend
@@ -58,7 +58,9 @@ This project requires python 3+
 - Connect to `localhost:8000
 
 ## Deploying with Docker/Heroku
-heroku container:login
-heroku container:push web
-heroku container:release web
-heroku open
+- heroku container:login
+- heroku container:push app cassandra --recursive
+- heroku container:release app cassandra
+
+## Cassandra
+- ./manage.py sync_cassandra
