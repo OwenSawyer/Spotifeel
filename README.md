@@ -41,6 +41,7 @@ Sentiment analysis through song valence + lyrics
 
 
 ## Extras (Post Release)
+- Use Celery -> automated fetch for registered accounts
 - Listen (tone/key, bpm) + week reports
 
 # Installing (OUTDATED)

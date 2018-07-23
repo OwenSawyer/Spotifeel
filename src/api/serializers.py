@@ -1,8 +1,21 @@
 from rest_framework import serializers
 
-from .models import Example
+from .models import User, Record
 
-class ExampleSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Example
+        model = User
         fields = '__all__'
+
+
+class RecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Record
+        fields = '__all__'
+
+
+class TimelineSerializer(serializers.BaseSerializer):
+
+    def records_to_timeline(self, records):
+        pass

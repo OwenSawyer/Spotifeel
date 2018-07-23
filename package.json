@@ -1,18 +1,8 @@
 {
   "name": "spotifeel",
   "version": "0.0.0",
-<<<<<<< HEAD
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors",
-    "dev-postbuild": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.dev.config.js --progress",
-    "prod-postbuild": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.prod.config.js --progress"
-  },
-=======
   "description": "ayy",
   "author": "Owen Sawyer <owensawyer95@gmail.com>",
->>>>>>> docker setup on heroku, swap react with vuejs
   "keywords": [],
   "license": "MIT",
   "main": "index.js",

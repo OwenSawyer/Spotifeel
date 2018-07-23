@@ -37,7 +37,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'src.drf_react.urls'
+ROOT_URLCONF = 'src.django.urls'
 
 TEMPLATES = [
     {
@@ -55,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'src.drf_react.wsgi.application'
+WSGI_APPLICATION = 'src.django.wsgi.application'
 
 ####
 #DATABASE

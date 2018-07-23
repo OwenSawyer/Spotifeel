@@ -12,8 +12,8 @@ RUN yarn install
 RUN npm run webpack
 RUN python manage.py collectstatic
 
-ADD ./drf_react /opt/drf_react/
-WORKDIR /opt/drf_react
+ADD ./django /opt/django/
+WORKDIR /opt/django
 
 RUN adduser -D myuser
 USER myuser
@@ -21,7 +21,7 @@ USER myuser
 # Run the app.  CMD is required to run on Heroku
 # Expose is NOT supported by Heroku
 # $PORT is set by Heroku
-CMD ["node server.js && gunicorn drf_react.wsgi -w 3 --log-file -"]
+CMD ["node server.js && gunicorn django.wsgi -w 3 --log-file -"]
 
 http://cassandra.apache.org/doc/latest/getting_started/index.html
 
@@ -84,7 +84,7 @@ RUN mkdir -p /tmp
 #RUN apk add --update python3 py3-pip bash
 #ADD /opt/requirements.txt /tmp/requirements.txt
 
-RUN mkdir -p /opt/drf_react
+RUN mkdir -p /opt/django
 RUN echo $(ls)
 RUN pip install -q -r ./requirements.txt
 
@@ -102,4 +102,4 @@ RUN python manage.py collectstatic --noinput
 ## Run the app.  CMD is required to run on Heroku
 ## Expose is NOT supported by Heroku
 ## $PORT is set by Heroku
-CMD ["sh","-c","gunicorn drf_react.wsgi -w 3"]
+CMD ["sh","-c","gunicorn django.wsgi -w 3"]

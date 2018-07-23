@@ -58,7 +58,7 @@ RUN mkdir -p /tmp
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install -q -r /tmp/requirements.txt
 
-RUN mkdir -p /opt && mkdir -p /opt/drf_react
+RUN mkdir -p /opt && mkdir -p /opt/django
 
 
     #&& \ yarn run prune
@@ -74,4 +74,4 @@ RUN yarn run build
 ## Run the app.  CMD is required to run on Heroku
 ## Expose is NOT supported by Heroku
 ## $PORT is set by Heroku
-CMD ["sh","-c","gunicorn src.drf_react.wsgi:application -w 3"]
+CMD ["sh","-c","gunicorn src.django.wsgi:application -w 3"]

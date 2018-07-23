@@ -8,4 +8,9 @@ requests
 django-cors-headers
 cassandra-driver==3.13.0
 django-cassandra-engine
-spotipy
+spotipy==2.4.4
+scikit-learn
+matplotlib
+numpy==1.15.0
+scipy
+bs4

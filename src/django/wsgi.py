@@ -1,5 +1,5 @@
 """
-WSGI config for drf_react project.
+WSGI config for django project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -12,7 +12,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.drf_react.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.django.settings")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
