@@ -1,23 +1,23 @@
 # DEPRECATED - Heroku does not support docker-compose.
 #
-#version: '3.3'
-#services:
-#  app:
-#    build:
-#      context: .
-#      dockerfile: src/Dockerfile-app-cassandra
-#    image: app
-#    ports:
-#      - "5000:5000"
-#    env_file: .env
+version: '3.3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    image: app
+    ports:
+      - "5000:5000"
+    env_file: .env
 #    depends_on:
 #      - cassandra
 #    links:
 #      - cassandra
-#    volumes:
-#      - type: bind
-#        source: ./
-#        target: /opt/
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/
 #  cassandra:
 #    build: cassandra
 #    image: cassandra

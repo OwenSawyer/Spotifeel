@@ -6,10 +6,11 @@ var vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+console.log(__dirname)
 module.exports = {
+  context: path.join(__dirname, '../'),
   entry: {
-    app: './app/main.js'
+    app: './main.js'
   },
   output: {
     path: config.build.assetsRoot,

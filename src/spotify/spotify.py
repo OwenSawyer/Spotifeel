@@ -7,15 +7,15 @@ class SpotifyService:
     featureNames = ["danceability", "energy", "key", "loudness", "mode", "speechiness", "acousticness",
                     "instrumentalness", "liveness", "valence", "tempo"]
 
-    def __init__(self):
-        pass
+    def __init__(self, token):
+        self.token = token
+        self.sp = spotipy.Spotify(auth=self.token)
 
     def convert_song_to_dataframe(self, song):
         pass
 
-    def get_recent(self, token):
-        sp = spotipy.Spotify(auth=token)
-        data = sp.current_user_recently_played(limit=25)
+    def get_recent(self):
+        data = self.sp.current_user_recently_played(limit=25)
         results = []
 
         for i in data['items']:
@@ -26,7 +26,7 @@ class SpotifyService:
             # played_at = i['played_at']
 
             for i in range(0, track):
-                analyzed = sp.audio_features(track)
+                analyzed = self.sp.audio_features(track)
                 features = []
                 for z in range(0, 11):
                     features.append(analyzed[0][self.featureNames[z]])
@@ -35,11 +35,10 @@ class SpotifyService:
 
         return results
 
-    def current(self, token):
-        sp = spotipy.Spotify(auth=token)
+    def current(self):
 
         try:
-            data = sp.current_user_playing_track()
+            data = self.sp.current_user_playing_track()
             item = data['item']
             title = item['name']
             artist = item['artists'][0]['name']
