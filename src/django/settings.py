@@ -6,10 +6,9 @@ SECRET_KEY = 'ur%8n=(lj9_2wozggc==^rny8pfwfip41(g4%3ht7$gj7f)l3&'
 
 DEBUG = os.environ.get('DEBUG', False)
 
-CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = ['*']
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,24 +19,27 @@ INSTALLED_APPS = (
     #third party apps
     'rest_framework',
     'webpack_loader',
-    'django_cassandra_engine',
+    #'django_cassandra_engine',
     #local apps
-    'src.api',
-)
+     'src.api'
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware'
+]
 
-ROOT_URLCONF = 'src.drf_react.urls'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+
+ROOT_URLCONF = 'src.django.urls'
 
 TEMPLATES = [
     {
@@ -55,26 +57,43 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'src.drf_react.wsgi.application'
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers':['console'],
+            'propagate': True,
+            'level':'DEBUG',
+        }
+    },
+}
+
+WSGI_APPLICATION = 'src.django.wsgi.application'
 
 ####
 #DATABASE
 ####
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django_cassandra_engine',
-        'NAME': 'db',
-        'TEST_NAME': 'test_db',
-        'HOST': 'db1.example.com',
-        'OPTIONS': {
-            'replication': {
-                'strategy_class': 'SimpleStrategy',
-                'replication_factor': 1
-            }
-        }
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_cassandra_engine',
+#         'NAME': 'db',
+#         'TEST_NAME': 'test_db',
+#         'HOST': 'db1.example.com',
+#         'OPTIONS': {
+#             'replication': {
+#                 'strategy_class': 'SimpleStrategy',
+#                 'replication_factor': 1
+#             }
+#         }
+#     }
+# }
 
 ####
 #INTERNATIONALIZATION

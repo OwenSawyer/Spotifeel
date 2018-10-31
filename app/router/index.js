@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import CartPage from '@/pages/CartPage'
 import HomePage from '@/pages/HomePage'
 import ProductPage from '@/pages/ProductPage'
+import TestPage from '@/pages/TestPage'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/product/:id',
       name: 'product',
       component: ProductPage
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestPage
     }
   ]
 })

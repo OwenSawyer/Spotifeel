@@ -10,6 +10,7 @@ Sentiment analysis through song valence + lyrics
 ### FE
 - swap React with Vue + (chartJS, vuex, hotloader) (ES2018?)
 - remove project specific Django code
+- SEGREGATED FE/BE serving - remove FE compilation from django
 
 ### BE
 - swap base python to anaconda env
@@ -41,6 +42,7 @@ Sentiment analysis through song valence + lyrics
 
 
 ## Extras (Post Release)
+- Use Celery -> automated fetch for registered accounts
 - Listen (tone/key, bpm) + week reports
 
 # Installing (OUTDATED)
@@ -53,9 +55,11 @@ This project requires python 3+
 * `python manage.py collectstatic`
 * `python manage.py runserver`
 
-## Running
-* `npm run build`
-- Connect to `localhost:8000
+## Running dev
+* `yarn run build`
+* `yarn run start`
+- Connect to `localhost:8080
+* `python3 manage.py runserver 0.0.0.0:8000`
 
 ## Deploying with Docker/Heroku
 - heroku container:login

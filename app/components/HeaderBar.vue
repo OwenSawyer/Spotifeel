@@ -2,6 +2,7 @@
   <div class="menu-links">
     <router-link to="/">Home</router-link>
     <router-link to="/cart">Cart ({{ cartCount }})</router-link>
+    <router-link to="/test">Test</router-link>
   </div>
 </template>
 
