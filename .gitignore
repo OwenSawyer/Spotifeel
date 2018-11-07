@@ -4,8 +4,12 @@ assets/bundles
 *.save
 .idea/
 static/
+build/
 webpack-stats.json
 package-lock.json
 dist/
+public/dist/
+.env.test
+.env.development
 test/e2e/reports
 selenium-debug.log
