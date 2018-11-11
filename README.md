@@ -1,6 +1,8 @@
 # Spotifeel
 Sentiment analysis through song valence + lyrics
 
+***TODO transfer from create-react-app build files***
+
 # TODO
 ## Setup
 
