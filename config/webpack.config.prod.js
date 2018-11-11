@@ -229,9 +229,9 @@ module.exports = {
       // Adds support for installing with Plug'n'Play, leading to faster installs and adding
       // guards against forgotten dependencies and such.
       PnpWebpackPlugin,
-      // Prevents users from importing files from outside of app/src/ (or node_modules/).
-      // This often causes confusion because we only process files within app/src/ with babel.
-      // To fix this, we prevent you from importing files out of app/src/ -- if you'd like to,
+      // Prevents users from importing files from outside of app/ (or node_modules/).
+      // This often causes confusion because we only process files within app/ with babel.
+      // To fix this, we prevent you from importing files out of app/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
@@ -516,8 +516,8 @@ module.exports = {
           '!**/*.json',
           '!**/__tests__/**',
           '!**/?(*.)(spec|test).*',
-          '!app/src/setupProxy.js',
-          '!app/src/setupTests.*',
+          '!app/setupProxy.js',
+          '!app/setupTests.*',
         ],
         watch: paths.appSrc,
         silent: true,

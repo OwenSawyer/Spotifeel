@@ -67,7 +67,7 @@ module.exports = function(proxy, allowedHost) {
     quiet: true,
     // Reportedly, this avoids CPU overload on some systems.
     // https://github.com/facebook/create-react-app/issues/293
-    // app/src/node_modules is not ignored to support absolute imports
+    // app/node_modules is not ignored to support absolute imports
     // https://github.com/facebook/create-react-app/issues/1065
     watchOptions: {
       ignored: ignoredFiles(paths.appSrc),
