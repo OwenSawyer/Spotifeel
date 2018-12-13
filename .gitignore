@@ -4,3 +4,4 @@ node_modules/
 build/
 .cache-*
 __snapshots__
+yarn-error.log

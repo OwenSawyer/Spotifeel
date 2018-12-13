@@ -9,8 +9,7 @@ import { login, logout } from './actions/auth';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import LoadingPage from './components/LoadingPage';
-import { unregister } from './serviceWorker';
-//
+
 const store = configureStore();
 let hasRendered = false;
 const renderApp = () => {
@@ -23,7 +22,6 @@ const renderApp = () => {
         hasRendered = true;
     }
 };
-//ReactDOM.render(<h1> Hi! </h1>, document.getElementById('root'));
 
 ReactDOM.render(<LoadingPage />, document.getElementById('root'));
 store.dispatch(login('abc123'));
@@ -33,4 +31,3 @@ if (history.location.pathname === '/') {
     history.push('/');
 }
 });
-unregister();

@@ -14,4 +14,3 @@ router = DefaultRouter()
 urlpatterns = [
     url(r'^', include(router.urls)),
 ]
-print(utils.get_files('main'))

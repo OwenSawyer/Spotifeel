@@ -60,13 +60,10 @@ RUN pip install -q -r /tmp/requirements.txt
 
 RUN mkdir -p /opt && mkdir -p /opt/django
 
-
     #&& \ yarn run prune
     #&& \ yarn cache clean
 
-
 RUN yarn run build
-#RUN python manage.py collectstatic --noinput
 
 ##RUN adduser -D myuser
 ##USER myuser
