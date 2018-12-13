@@ -74,4 +74,4 @@ RUN yarn run build
 ## Run the app.  CMD is required to run on Heroku
 ## Expose is NOT supported by Heroku
 ## $PORT is set by Heroku
-CMD ["sh","-c","gunicorn src.django.wsgi:application -w 3"]
+CMD ["sh","-c","gunicorn django.wsgi:application -w 3"]

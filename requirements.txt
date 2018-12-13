@@ -8,6 +8,7 @@ requests
 django-cors-headers
 cassandra-driver==3.13.0
 django-cassandra-engine
+# pip3 install git+https://github.com/plamere/spotipy.git --upgrade
 spotipy==2.4.4
 scikit-learn
 matplotlib

@@ -1,18 +1,14 @@
 # Spotifeel
 Sentiment analysis through song valence + lyrics
 
-***TODO transfer from create-react-app build files***
-
 # TODO
-## Setup
+### Setup
+- Upgrade webpack-dev-server (+ webpack) to 4.x compatibility
+    - https://www.npmjs.com/advisories/725
+
 
 ### CD
 - [x] dockerize before heroku (really, just run deploys fully through docker)
-
-### FE
-- swap React with Vue + (chartJS, vuex, hotloader) (ES2018?)
-- remove project specific Django code
-- SEGREGATED FE/BE serving - remove FE compilation from django
 
 ### BE
 - swap base python to anaconda env
@@ -33,35 +29,29 @@ Sentiment analysis through song valence + lyrics
 
 #### Lyrics
 - Lyric scrape (genius api) (RUN ASNYC)
-- keyword extraction + cleanup (contractions?..)
+- keyword extraction + cleanup (contractions etc..)
 
 ### REST Service
 - Cassandra setup
 - User endpoints
 
 ### Frontend
-- UI (does anything more need to be said?)
-
+- some fancypants ui idk
 
 ## Extras (Post Release)
 - Use Celery -> automated fetch for registered accounts
 - Listen (tone/key, bpm) + week reports
 
-# Installing (OUTDATED)
+# Installation
 
 This project requires python 3+
 
+## Running dev
 * `yarn install`
 * `pip3 install -r requirements.txt`
-* `npm run webpack`
-* `python manage.py collectstatic`
+* `npm run start`
 * `python manage.py runserver`
-
-## Running dev
-* `yarn run build`
-* `yarn run start`
-- Connect to `localhost:8080
-* `python3 manage.py runserver 0.0.0.0:8000`
+* Connect to `localhost:8000`
 
 ## Deploying with Docker/Heroku
 - heroku container:login

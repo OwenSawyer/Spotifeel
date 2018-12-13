@@ -103,3 +103,19 @@ RUN python manage.py collectstatic --noinput
 ## Expose is NOT supported by Heroku
 ## $PORT is set by Heroku
 CMD ["sh","-c","gunicorn django.wsgi -w 3"]
+
+
+backend serves react --> maintains control over the spotify tokens,
+            since frontend does require them to request the redirect
+            therefore backend needs control to  redirect (at least for the
+            authorization flow grant style)
+
+/login (on button click)
+    -> redirect to spotify.authorize w/ client id etc.
+/callback
+    -> after spotify authorize redirects here, take token and
+        make ANOTHER call to spotify.token (atuhrization_code grant type)
+        THEN redirect again back to website.
+/refresh_token
+    -> utility endpoint to refresh existing tokens
+
