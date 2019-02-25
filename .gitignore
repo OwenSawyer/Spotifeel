@@ -5,3 +5,4 @@ build/
 .cache-*
 __snapshots__
 yarn-error.log
+data/cassandra/

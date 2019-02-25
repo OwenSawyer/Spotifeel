@@ -2,20 +2,21 @@
 Sentiment analysis through song valence + lyrics
 
 # TODO
-### Setup
+## Setup
 - Upgrade webpack-dev-server (+ webpack) to 4.x compatibility
     - https://www.npmjs.com/advisories/725
 
-
-### CD
+## CD
 - [x] dockerize before heroku (really, just run deploys fully through docker)
 
-### BE
+## BE
+
+### API
+- setup Cassandra (tables, models, saving spotify data)
+- setup user endpoints (TODO - swagger setup)
 - swap base python to anaconda env
 - add toolkits (keras, nltk, ..)
 - investigate parallel requests (asyncio / tornado)
-
-## Development
 
 ### Data aggregation
 
@@ -31,11 +32,7 @@ Sentiment analysis through song valence + lyrics
 - Lyric scrape (genius api) (RUN ASNYC)
 - keyword extraction + cleanup (contractions etc..)
 
-### REST Service
-- Cassandra setup
-- User endpoints
-
-### Frontend
+## Frontend
 - some fancypants ui idk
 
 ## Extras (Post Release)
@@ -44,19 +41,41 @@ Sentiment analysis through song valence + lyrics
 
 # Installation
 
-This project requires python 3+
+## Requirements
+- python 3.x
 
 ## Running dev
 * `yarn install`
 * `pip3 install -r requirements.txt`
 * `npm run start`
+* `python manage.py sync_cassandra`
+* `python manage.py seed # TODO? seed from pickles.`
 * `python manage.py runserver`
 * Connect to `localhost:8000`
 
-## Deploying with Docker/Heroku
-- heroku container:login
-- heroku container:push app cassandra --recursive
-- heroku container:release app cassandra
-
 ## Cassandra
 - ./manage.py sync_cassandra
+
+## Docker
+- turn off all running Docker containers
+  - `docker-compose down`
+- delete any persistent data
+  - `rm -rf data/`
+- rebuild the images
+  - `docker-compose build`
+  
+- start Cassandra
+  - `docker-compose up cassandra`
+
+- view cluster status
+  - `docker-compose run nodetool status`
+
+- create schema
+  - `docker-compose run cqlsh -f /schema.cql`
+
+- confirm schema
+  - `docker-compose run cqlsh -e "DESCRIBE SCHEMA;"`
+
+docker ps
+docker system prune
+docker exec -it 426c3e50d2b0 ip addr
