@@ -1,6 +1,0 @@
-FROM cassandra
-
-RUN mkdir -p /data
-COPY ./cassandra/data/seed.cql /data/
-
-CMD ["sh","-c","echo 'hello world'"]

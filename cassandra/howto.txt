@@ -1,0 +1,30 @@
+kill all running containers with -      docker kill $(docker ps -q)
+delete all stopped containers with -    docker rm $(docker ps -a -q)
+delete all images with  -               docker rmi $(docker images -q)
+docker volume ls 
+
+docker ps -a
+docker system prune
+docker exec -it 426c3e50d2b0 ip addr
+docker logs 9060ef047438
+
+
+start server instance -         docker run --name some-cassandra -d cassandra:3.11
+make cluster (same machine) -   docker run --name some-cassandra2 -d --link some-cassandra:cassandra cassandra:tag
+cqlsh -                         docker run -it --link some-cassandra:cassandra --rm cassandra cqlsh cassandra
+exec  -                         docker exec -it some-cassandra bash
+logs  -                         docker logs some-cassandra
+data storage -                  docker run --name some-cassandra -v /my/own/datadir:/var/lib/cassandra -d cassandra:tag
+cp (containerid) -              docker cp foo.txt mycontainer:/foo.txt
+
+//todo: add user/pw protection
+
+// Mountpoint": "/var/lib/docker/volumes/cassandra-volume/_data"
+docker volume create --name cassandra-volume
+
+docker run -v cassandra-volume:/var/lib/cassandra -p 9042:9042 --rm --name some-cassandra -d cassandra:3.11
+docker run --name some-cassandra2 -d --link some-cassandra:cassandra cassandra:3.11
+(some-cassandra container id) docker cp schema.cql 53fa28d35d3e:/schema.cql
+docker exec -it some-cassandra cqlsh -f /schema.cql
+docker exec -it some-cassandra cqlsh
+    select * from spotifeel.user;

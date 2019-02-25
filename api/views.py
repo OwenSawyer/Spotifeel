@@ -6,7 +6,7 @@ from django.views.generic import RedirectView, TemplateView
 
 #https://stackoverflow.com/questions/51919651/spotify-authorization-code-flow-returns-incomplete-response
 
-with open('C:/Users/Owen/Desktop/spotify.txt', 'r') as fp:
+with open('/home/osawyer/website/spotify.txt', 'r') as fp:
     env = [i.strip() for i in fp.readlines()]
     CLIENT_ID = env[2]
     CLIENT_SECRET = env[3]
