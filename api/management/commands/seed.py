@@ -22,8 +22,11 @@ class Command(BaseCommand):
         query_manager = QueryManager()
 
         query_manager.batch_insert(User, self.handle_user())
+
+        songs = self.handle_songs()
+        played_at = {dct['uri']:dct['played'] for dct in songs}
         query_manager.batch_insert(Song, self.handle_songs())
-        query_manager.batch_insert(Features, self.handle_features())
+        query_manager.batch_insert(Features, self.handle_features(played_at))
 
     def handle_user(self):
     #     id UUID,
@@ -58,6 +61,7 @@ class Command(BaseCommand):
             formatted = {
                 'uid': uuid.uuid1(),
                 'uri': song_json['track']['uri'],
+                'played': song_json['played_at'],
                 'created': datetime.datetime.now(),
                 'title': song_json['track']['name'],
                 'artists': [artist['name'] for artist in song_json['track']['artists']],
@@ -108,13 +112,14 @@ class Command(BaseCommand):
                      }]
         return [handle_song(i) for i in user_json]
 
-    def handle_features(self):
+    def handle_features(self, played_at):
 
-        def handle_feature(feature_json):
+        def handle_feature(feature_json, played_at):
 
             formatted = {
                 'uid': uuid.uuid1(),
                 'uri': feature_json['uri'],
+                'played': played_at[feature_json['uri']],
                 'created': datetime.datetime.now(),
                 'key': feature_json['key'],
                 'mode': feature_json['mode'],
@@ -128,6 +133,7 @@ class Command(BaseCommand):
                 'liveness': feature_json['liveness'],
                 'valence': feature_json['valence']
             }
+
             return formatted
 
         #     uid UUID,
@@ -144,9 +150,12 @@ class Command(BaseCommand):
         # instrumentalness double,
         # liveness double,
         # valence double,
+        played_at = {
+            '5Q4mP2MPgZelC7soOeeARX':'2018-11-26T22:58:32.121Z'
+        }
         user_json = [{'danceability': 0.486, 'energy': 0.676, 'key': 4, 'loudness': -8.377, 'mode': 1,
                       'speechiness': 0.0974, 'acousticness': 0.0436, 'instrumentalness': 2.43e-05, 'liveness': 0.0812,
                       'valence': 0.293, 'tempo': 90.242, 'type': 'audio_features', 'id': '5Q4mP2MPgZelC7soOeeARX',
                       'uri': 'spotify:track:5Q4mP2MPgZelC7soOeeARX', 'track_href': 'https://api.spotify.com/v1/tracks/5Q4mP2MPgZelC7soOeeARX',
                       'analysis_url': 'https://api.spotify.com/v1/audio-analysis/5Q4mP2MPgZelC7soOeeARX', 'duration_ms': 206000, 'time_signature': 4}]
-        return [handle_feature(i) for i in user_json]
+        return [handle_feature(i, played_at) for i in user_json]

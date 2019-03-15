@@ -18,8 +18,9 @@ class Song(DjangoCassandraModel):
         get_pk_field = 'uid'
 
     uid = columns.UUID(primary_key=True)
-    created = columns.DateTime(primary_key=True, clustering_order="DESC")
+    played = columns.Datetime(primary_key=True, clustering_order="DESC")
     uri = columns.Text(primary_key=True)
+    created = columns.DateTime()
 
     title = columns.Text()
     artists = columns.List(columns.Text())
@@ -37,8 +38,9 @@ class Features(DjangoCassandraModel):
         get_pk_field = 'uid'
 
     uid = columns.UUID(primary_key=True)
-    created = columns.DateTime(primary_key=True, clustering_order="DESC")
+    played = columns.Datetime(primary_key=True, clustering_order="DESC")
     uri = columns.Text(primary_key=True)
+    created = columns.DateTime()
 
     key = columns.Double()
     mode = columns.Double()

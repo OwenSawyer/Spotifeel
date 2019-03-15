@@ -15,19 +15,21 @@ CREATE TABLE user (
 CREATE TABLE songs_by_user (
     uid UUID,
     uri text,
+    played timestamp,
     created timestamp,
     title text,
     artists list<text>,
     duration double,
     album text,
     isrc text,
-    PRIMARY KEY(uid, created, uri)
-) WITH CLUSTERING ORDER BY (created DESC)
+    PRIMARY KEY(uid, played, uri)
+) WITH CLUSTERING ORDER BY (played DESC)
   AND COMMENT = 'songs by user';
 
 CREATE TABLE features_by_user (
     uid UUID,
     uri text,
+    played timestamp,
     created timestamp,
     key double,
     mode double,
@@ -40,6 +42,6 @@ CREATE TABLE features_by_user (
     instrumentalness double,
     liveness double,
     valence double,
-    PRIMARY KEY(uid, created, uri)
-) WITH CLUSTERING ORDER BY (created DESC)
+    PRIMARY KEY(uid, played, uri)
+) WITH CLUSTERING ORDER BY (played DESC)
   AND COMMENT = 'features by user';

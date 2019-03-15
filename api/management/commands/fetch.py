@@ -39,8 +39,11 @@ class Command(BaseCommand):
         print(feats)
 
         query_manager = QueryManager()
-        query_manager.batch_insert(Song, self.handle_songs(songs))
-        query_manager.batch_insert(Features, self.handle_features(feats))
+        song_json = self.handle_songs(songs)
+        played_at = {dct['uri']:dct['played'] for dct in song_json}
+
+        query_manager.batch_insert(Song, song_json)
+        query_manager.batch_insert(Features, self.handle_features(feats, played_at))
 
     def handle_songs(self, user_json):
 
@@ -48,6 +51,7 @@ class Command(BaseCommand):
             formatted = {
                 'uid': uuid.uuid1(),
                 'uri': song_json['uri'],
+                'played': song_json['played_at'],
                 'created': datetime.datetime.now(),
                 'title': song_json['name'],
                 'artists': [artist['name'] for artist in song_json['artists']],
@@ -59,13 +63,14 @@ class Command(BaseCommand):
 
         return [handle_song(i) for i in user_json]
 
-    def handle_features(self, user_json):
+    def handle_features(self, user_json, played_at):
 
-        def handle_feature(feature_json):
+        def handle_feature(feature_json, played_at):
 
             formatted = {
                 'uid': uuid.uuid1(),
                 'uri': feature_json['uri'],
+                'played': played_at[feature_json['uri']],
                 'created': datetime.datetime.now(),
                 'key': feature_json['key'],
                 'mode': feature_json['mode'],
@@ -81,7 +86,7 @@ class Command(BaseCommand):
             }
             return formatted
 
-        return [handle_feature(i) for i in user_json]
+        return [handle_feature(i, played_at) for i in user_json]
 
 
 # if __name__=='__main__':
